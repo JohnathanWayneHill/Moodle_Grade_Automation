@@ -32,6 +32,7 @@ Pipeline 7:
 Final Step: 
 * Download assignments, format directories, extract all grade metrics, overview assignments, AND
 -->>> calculate final grade
+-->>> calculation of final grade should give instructor options to omit/add metrics and manually deduct/add points as desired
 ____________________________________________ 
 
 Next: 
