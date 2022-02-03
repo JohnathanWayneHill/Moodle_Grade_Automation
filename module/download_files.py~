@@ -1,3 +1,8 @@
+import time
+import random
+import os
+import csv
+
 def time_to_sleep():  # catch me if you can
     ''' 
         Function for sleeping so my IP isn't blocked.
