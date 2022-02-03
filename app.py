@@ -37,8 +37,8 @@ def main():
 
     print("navigate to weekly assignment")
     # navigate to weekly assignment
-    df.click_weekly_assignment_link(driver)  # BROKE HERE
-    time_to_sleep()
+    df.click_weekly_assignment_link(driver)  
+    df.time_to_sleep()
 
     # select cohort
     cohort = df.select_cohort_from_list(driver)
