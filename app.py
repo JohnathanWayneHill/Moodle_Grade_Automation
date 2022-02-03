@@ -1,9 +1,9 @@
 '''
 Driver code for Moodle grade automation tool.
 '''
-from dotenv import load_dotenv  # pip3 install python-dotenv
+# from dotenv import load_dotenv  # pip3 install python-dotenv, for login functionality
 from selenium import webdriver
-# pip install undetected-chromedriver
+# pip install undetected-chromedriver \\\\ put version in requirements.txt
 import undetected_chromedriver.v2 as uc  # catch me if you can
 import time
 import random
@@ -12,12 +12,15 @@ import csv
 
 
 def time_to_sleep():  # catch me if you can
-    round = random.randint(1, 4)
-    num = random.uniform(0, 10)
-    const = 10 ** round
-    num_round = (((num) * const) // 1) / const
-    print(num_round)
-    time.sleep(num_round)
+    ''' 
+        Function for sleeping so my IP isn't blocked.
+    '''
+    round = random.randint(1, 4)  # number of dec places to round
+    num = random.uniform(0, 10)  # random float
+    const = 10 ** round  # constant to mult and divide
+    num_round = (((num) * const) // 1) / const  # round number
+    print(num_round)  # print time to sleep
+    time.sleep(num_round)  # sleep
 
 
 def select_week():
@@ -61,13 +64,6 @@ def click_weekly_assignment_link(driver):
     time_to_sleep()
     driver.get(assignment_link)
     print("navigate to assignment page")
-
-
-'''
-# select grade button 
-grade_button = driver.find_element_by_xpath(
-    "//a[@class='btn btn-primary ml-1']")
-'''
 
 
 def select_cohort_from_list(driver):
@@ -120,7 +116,8 @@ def capture_student_name(driver):
     links_text = [i.get_attribute("text") for i in links]
     student = links_text[4]
     student_info = student.split("\n")
-    student_name = student_info[2].strip()
+    student_name = student_info[2].strip().lower().replace(
+        " ", "_").replace(".", "")
     return student_name
 
 
