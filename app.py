@@ -8,6 +8,7 @@ from selenium import webdriver
 import time
 import random
 import os
+import csv
 
 
 def time_to_sleep():  # catch me if you can
@@ -88,7 +89,7 @@ cohort.click()
 
 # click grade button
 grade_button = driver.find_element_by_xpath(
-    ...     "//a[@class='btn btn-primary ml-1']")
+    "//a[@class='btn btn-primary ml-1']")
 grade_button.click()
 
 # link to download assignment
@@ -104,5 +105,19 @@ student = links_text[4]
 student_info = student.split("\n")
 student_name = student_info[2].strip()
 
+# list of all student names; change when while loop added
+grading_info = []
+grading_info.append((student_name, assignment_name))
+
+# write (student_name, filename) to csv file - to be used in bash script
+os.chdir('../grade_data')
+with open('grade_data.csv', 'w') as file:
+    csv_file = csv.writer(file)
+    for row in grading_info:
+        csv_file.writerow(row)
+os.chdir('../Moodle_Grade_Automation')
+
+# TODO: change filenames from original name to
+#            student_name_workshop[week number].[extension]
 
 driver.quit()
