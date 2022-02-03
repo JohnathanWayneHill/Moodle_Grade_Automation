@@ -1,0 +1,41 @@
+Pipeline 1: 
+1) sanity-check single student pipeline
+2) write tests for single student
+3) place functions in modules 
+4) write driver code for downloading all students 
+5) write tests for downloading all students 
+6) write bash script for populating student directories & assignments 
+ ~ handle both py and zip files 
+7) sanity-check for downloading other weeks 
+8) build up Makefile for downloading assignments & organizing student directories
+
+Pipeline 2: 
+1) Decide GUI framework for instructor dashboard
+2) Begin building instructor dashboard  
+
+Pipeline 3: 
+* Output comparison tool 
+* Output grader 
+
+Pipeline 4: 
+* Assignment style grader
+
+Pipeline 5: 
+* Assignment functionality grader 
+
+Pipeline 6: 
+* Bonus question identifier 
+
+Pipeline 7: 
+* Easy assignment overview for sanity checking
+
+Final Step: 
+* Download assignments, format directories, extract all grade metrics, overview assignments, AND
+-->>> calculate final grade
+-->>> calculation of final grade should give instructor options to omit/add metrics and manually deduct/add points
+____________________________________________ 
+
+Next: 
+~ Begin finding volunteer instructors to join project after P1 (1-8) and P2 (1-2) are complete.
+
+
