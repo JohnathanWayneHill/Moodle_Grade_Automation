@@ -4,7 +4,7 @@ Driver code for Moodle grade automation tool.
 from dotenv import load_dotenv  # pip3 install python-dotenv
 from selenium import webdriver
 # pip install undetected-chromedriver
-# import undetected_chromedriver.v2 as uc  # catch me if you can
+import undetected_chromedriver.v2 as uc  # catch me if you can
 import time
 import random
 import os
@@ -52,11 +52,15 @@ def click_weekly_assignment_link(driver):
     # put back?
     #assignment_link = driver.find_element_by_xpath("//span[@class='instancename']")
     list_of_hrefs = driver.find_elements_by_tag_name("a")
+    print("getting hrefs")
     assignment_hrefs = [
         i for i in list_of_hrefs if 'assign' in i.get_attribute('href')]
-    assignment_link = assignment_hrefs[2]
+    print("getting assignment hrefs")
+    assignment_link = assignment_hrefs[2].get_attribute("href")
+    print("getting second href")
     time_to_sleep()
     driver.get(assignment_link)
+    print("navigate to assignment page")
 
 
 '''
@@ -75,18 +79,20 @@ def select_cohort_from_list(driver):
                for i in options if i.get_attribute("value").isdigit()]
     ls_tups_cohorts = [(str(num), ch) for num, ch in list(enumerate(cohorts))]
     cohort_options = {ch[0]: ch[1] for ch in ls_tups_cohorts}
+    print(options[0])
+    print(options[0].get_attribute("text"))
     while True:
         print("select cohort: ")
-        print(''.join([i + ') ' + options[i] + '\n'for i in options]))
+        print(''.join([i + ') ' + cohort_options[i] +
+              '\n' for i in cohort_options]))
         option = input('select option: ')
         if option in cohort_options:
             break
         print("choose again\n")
-    return option
+    return cohort_options[option]
 
 
-def click_cohort(driver):
-    select = cohort_options[option]
+def click_cohort(driver, select):
     cohort = driver.find_element_by_xpath("//*[text()='" + select + "']")
     cohort.click()
 
@@ -118,11 +124,6 @@ def capture_student_name(driver):
     return student_name
 
 
-# list of all student names; change when while loop added
-grading_info = []
-grading_info.append((student_name, assignment_name))
-
-
 def capture_assignment_info(grading_info):
     # write (student_name, filename) to csv file - to be used in bash script
     os.chdir('../grade_data')
@@ -138,42 +139,54 @@ def capture_assignment_info(grading_info):
 
 def main():
     # path to Chrome webdriver
-    driver = webdriver.Chrome('../webdriver/chromedriver')
-    # driver = uc.Chrome()
+    #driver = webdriver.Chrome('../webdriver/chromedriver')
+    driver = uc.Chrome()
+    print("driver")
     driver.get("https://learn.nucamp.co/")
     input("Login then press enter.")
     time_to_sleep()
+    print("navigate to NuCamp page")
 
     # navigate to python fundamentals class
     driver.get("https://learn.nucamp.co/course/view.php?id=29")
-
+    print("navigate to python page")
+    time_to_sleep()
+    print("select week")
     week = select_week()
+    time_to_sleep()
 
+    print("navigate to selected week")
     # navigate to selected week
     click_week_module_link(driver, week)
+    time_to_sleep()
 
+    print("navigate to weekly assignment")
     # navigate to weekly assignment
-    click_weekly_assignment_link(driver)
+    click_weekly_assignment_link(driver)  # BROKE HERE
+    time_to_sleep()
 
     # select cohort
     cohort = select_cohort_from_list(driver)
+    time_to_sleep()
 
     # navigate to cohort
-    click_cohort(driver)
+    click_cohort(driver, cohort)
+    time_to_sleep()
 
     # navigate to grading page
     click_grade_button(driver)
+    time_to_sleep()
 
     # download assignment and capture assignment name
     assignment_name = download_student_assignment(driver)
-
+    time_to_sleep()
     # capture student name
     student_name = capture_student_name(driver)
-
+    time_to_sleep()
     # list of all student names; change when while loop added
     grading_info = []
     grading_info.append((student_name, assignment_name))
-
+    time_to_sleep()
     # write assignment info to csv in parent directory
     capture_assignment_info(grading_info)
 
