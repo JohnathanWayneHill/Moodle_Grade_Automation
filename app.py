@@ -5,10 +5,7 @@ Driver code for Moodle grade automation tool.
 from selenium import webdriver
 # pip install undetected-chromedriver \\\\ put version in requirements.txt
 import undetected_chromedriver.v2 as uc  # catch me if you can
-import time
-import random
-import os
-import csv
+
 
 # TODO: change filenames from original name to
 #            student_name_workshop[week number].[extension]
