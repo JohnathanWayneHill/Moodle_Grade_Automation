@@ -1,0 +1,20 @@
+Name: undetected-chromedriver
+Version: 3.0.3
+Summary: selenium.webdriver.Chrome replacement wiht compatiblity for Brave, and other Chromium baed browsers.     not triggered by CloudFlare/Imperva/hCaptcha and such.          NOTE: results may vary due to many factors. No guarantees are given, except for ongoing efforts in understanding detection algorithms.     
+Home-page: https://github.com/ultrafunkamsterdam/undetected-chromedriver
+Author: UltrafunkAmsterdam
+Author-email: info@blackhat-security.nl
+License: GPL-3.0
+Location: /usr/local/lib/python3.9/site-packages
+Requires: requests, selenium, websockets
+Required-by: 
+Name: selenium
+Version: 4.1.0
+Summary: 
+Home-page: https://www.selenium.dev
+Author: 
+Author-email: 
+License: Apache 2.0
+Location: /usr/local/lib/python3.9/site-packages
+Requires: trio, trio-websocket, urllib3
+Required-by: undetected-chromedriver
