@@ -37,7 +37,7 @@ def click_week_module_link(driver, week):
                   '5': 'Week 5: All About Algorithms'}
 
     # enter week module
-    target_week = driver.find_element_by_partial_link_text(week_title[week])
+    target_week = driver.find_element(By.PARTIAL_LINK_TEXT, week_title[week])
     time_to_sleep()
     target_week.click()
 
@@ -46,7 +46,7 @@ def click_weekly_assignment_link(driver):
     # select assignment link
     # put back?
     #assignment_link = driver.find_element_by_xpath("//span[@class='instancename']")
-    list_of_hrefs = driver.find_elements_by_tag_name("a")
+    list_of_hrefs = driver.find_elements(By.TAG_NAME, "a")
     print("getting hrefs")
     assignment_hrefs = [
         i for i in list_of_hrefs if 'assign' in i.get_attribute('href')]
@@ -60,7 +60,7 @@ def click_weekly_assignment_link(driver):
 
 def select_cohort_from_list(driver):
     # to select cohorts
-    options = driver.find_elements_by_tag_name("option")
+    options = driver.find_elements(By.TAG_NAME, "option")
     # finding is.digit() because "seperate groups" option values are digits,
     #    rest are links
     cohorts = [i.get_attribute("text")
@@ -81,20 +81,20 @@ def select_cohort_from_list(driver):
 
 
 def click_cohort(driver, select):
-    cohort = driver.find_element_by_xpath("//*[text()='" + select + "']")
+    cohort = driver.find_element(By.XPATH, "//*[text()='" + select + "']")
     cohort.click()
 
 
 def click_grade_button(driver):
     # click grade button
-    grade_button = driver.find_element_by_xpath(
+    grade_button = driver.find_element(By.XPATH,
         "//a[@class='btn btn-primary ml-1']")
     grade_button.click()
 
 
 def download_student_assignment(driver):
     # link to download assignment
-    list_of_hrefs = driver.find_elements_by_tag_name("a")
+    list_of_hrefs = driver.find_elements(By.TAG_NAME, "a")
     link = [i for i in list_of_hrefs if i.get_attribute(
         "target") == '_blank'][0]
     assignment_name = link.get_attribute("text")
@@ -104,7 +104,7 @@ def download_student_assignment(driver):
 
 def capture_student_name(driver):
     # getting student name
-    links = driver.find_elements_by_tag_name("a")
+    links = driver.find_elements(By.TAG_NAME, "a")
     links_text = [i.get_attribute("text") for i in links]
     student = links_text[4]
     student_info = student.split("\n")

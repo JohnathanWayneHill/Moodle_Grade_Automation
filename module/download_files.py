@@ -2,6 +2,7 @@ import time
 import random
 import os
 import csv
+from selenium.webdriver.common.by import By
 
 def time_to_sleep():  # catch me if you can
     ''' 
