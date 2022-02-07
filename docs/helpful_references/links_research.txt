@@ -1,0 +1,9 @@
+Python REST API Moodle - Moodle Forum 
+https://moodle.org/mod/forum/discuss.php?d=393038  
+
+Python REST API Moodle - implementation 
+https://github.com/mrcinv/moodle_api.py 
+
+Moodle Core APIs 
+https://docs.moodle.org/dev/Core_APIs 
+
